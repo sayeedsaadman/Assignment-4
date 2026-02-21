@@ -1,11 +1,420 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Job Application Tracker</title>
-</head>
-<body>
-    
-</body>
+    <link rel="shortcut icon" href="assets/jobs.png" type="image/x-icon" />
+    <!-- Font  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Outfit:wght@100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome  -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- Daisy Ui -->
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <style>
+      * {
+        font-family: "Geist", sans-serif;
+      }
+    </style>
+  </head>
+  <body class="bg-[#F8FAFC]">
+    <section class="w-3/4 mx-auto px-4 py-8">
+      <h1 class="text-3xl font-bold text-black">Job Application Tracker</h1>
+      <!-- Dashboard -->
+      <section class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div
+          class="card bg-white transition duration-300 ease-in-out transform hover:bg-slate-100 hover:-translate-y-1 hover:shadow-xl cursor-pointer"
+        >
+          <div class="card-body">
+            <p class="text-sm text-slate-500">Total</p>
+            <p id="totalCount" class="text-3xl font-bold">8</p>
+          </div>
+        </div>
+        <div
+          class="card bg-white transition duration-300 ease-in-out transform hover:bg-slate-100 hover:-translate-y-1 hover:shadow-xl cursor-pointer"
+        >
+          <div class="card-body">
+            <p class="text-sm text-slate-500">Interview</p>
+            <p id="interviewCount" class="text-3xl font-bold text-emerald-600">
+              0
+            </p>
+          </div>
+        </div>
+        <div
+          class="card bg-white transition duration-300 ease-in-out transform hover:bg-slate-100 hover:-translate-y-1 hover:shadow-xl cursor-pointer"
+        >
+          <div class="card-body">
+            <p class="text-sm text-slate-500">Rejected</p>
+            <p id="rejectedCount" class="text-3xl font-bold text-red-500">0</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="divider my-8"></div>
+
+      <!-- Available Jobs -->
+      <section class="rounded-2xl p-4">
+        <div class="flex items-center justify-between">
+          <h2 class="text-lg font-bold text-black">Available Jobs</h2>
+          <p class="text-sm text-slate-500">
+            <span id="jobCount">0</span> jobs
+          </p>
+        </div>
+
+        <!-- Toggle Option -->
+        <div class="mt-4 flex gap-2">
+          <button id="optionAll" class="btn btn-sm btn-primary">All</button>
+          <button id="optionInterview" class="btn btn-sm btn-ghost">
+            Interview
+          </button>
+          <button id="optionRejected" class="btn btn-sm btn-ghost">
+            Rejected
+          </button>
+        </div>
+
+        <!-- Cards Container -->
+        <div id="jobsContainer" class="mt-5 space-y-4">
+          <!-- CARD 1 -->
+          <div class="job-card card bg-base-100 shadow-sm" data-status="not">
+            <div class="card-body">
+              <div class="flex items-start justify-between">
+                <div>
+                  <h3 class="text-lg font-bold">Mobile First Corp</h3>
+                  <p class="text-slate-500">React Native Developer</p>
+                </div>
+                <button
+                  class="btn btn-ghost btn-sm btn-circle delete-btn"
+                  title="Delete"
+                >
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </div>
+              <p class="text-sm text-slate-500 mt-1">
+                Chattogram, BD • Part-time • ৳25,000 - ৳45,000
+              </p>
+
+              <span class="badge badge-ghost status-badge mt-3"
+                >NOT APPLIED</span
+              >
+
+              <p class="mt-3 text-slate-700">
+                Build cross-platform mobile apps with React Native and improve
+                performance for large user bases.
+              </p>
+
+              <div class="mt-4 flex gap-2 flex-wrap">
+                <button
+                  class="btn btn-outline btn-success btn-sm interview-btn"
+                >
+                  Interview
+                </button>
+                <button class="btn btn-outline btn-error btn-sm rejected-btn">
+                  Rejected
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 2 -->
+          <div class="job-card card bg-base-100 shadow-sm" data-status="not">
+            <div class="card-body">
+              <div class="flex items-start justify-between">
+                <div>
+                  <h3 class="text-lg font-bold">WebFlow Agency</h3>
+                  <p class="text-slate-500">Web Designer & Developer</p>
+                </div>
+                <button
+                  class="btn btn-ghost btn-sm btn-circle delete-btn"
+                  title="Delete"
+                >
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </div>
+              <p class="text-sm text-slate-500 mt-1">
+                Rajshahi, BD • Part-time • ৳45,000 - ৳65,000
+              </p>
+              <span class="badge badge-ghost status-badge mt-3"
+                >NOT APPLIED</span
+              >
+              <p class="mt-3 text-slate-700">
+                Create modern websites for client brands with responsive design
+                and clean UI components.
+              </p>
+              <div class="mt-4 flex gap-2 flex-wrap">
+                <button
+                  class="btn btn-outline btn-success btn-sm interview-btn"
+                >
+                  Interview
+                </button>
+                <button class="btn btn-outline btn-error btn-sm rejected-btn">
+                  Rejected
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 3 -->
+          <div class="job-card card bg-base-100 shadow-sm" data-status="not">
+            <div class="card-body">
+              <div class="flex items-start justify-between">
+                <div>
+                  <h3 class="text-lg font-bold">DataBridge Ltd</h3>
+                  <p class="text-slate-500">Junior Data Analyst</p>
+                </div>
+                <button
+                  class="btn btn-ghost btn-sm btn-circle delete-btn"
+                  title="Delete"
+                >
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </div>
+              <p class="text-sm text-slate-500 mt-1">
+                Dhaka, BD • Full-time • ৳50,000 - ৳70,000
+              </p>
+              <span class="badge badge-ghost status-badge mt-3"
+                >NOT APPLIED</span
+              >
+              <p class="mt-3 text-slate-700">
+                Clean data, create simple dashboards, and share insights with
+                the business team.
+              </p>
+              <div class="mt-4 flex gap-2 flex-wrap">
+                <button
+                  class="btn btn-outline btn-success btn-sm interview-btn"
+                >
+                  Interview
+                </button>
+                <button class="btn btn-outline btn-error btn-sm rejected-btn">
+                  Rejected
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 4 -->
+          <div class="job-card card bg-base-100 shadow-sm" data-status="not">
+            <div class="card-body">
+              <div class="flex items-start justify-between">
+                <div>
+                  <h3 class="text-lg font-bold">CloudNest</h3>
+                  <p class="text-slate-500">Frontend Developer (JS)</p>
+                </div>
+                <button
+                  class="btn btn-ghost btn-sm btn-circle delete-btn"
+                  title="Delete"
+                >
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </div>
+              <p class="text-sm text-slate-500 mt-1">
+                Noakhali, BD • Part-time • ৳25,000 - ৳45,000
+              </p>
+              <span class="badge badge-ghost status-badge mt-3"
+                >NOT APPLIED</span
+              >
+              <p class="mt-3 text-slate-700">
+                Build fast UI pages using Vanilla JS and Tailwind with strong
+                accessibility.
+              </p>
+              <div class="mt-4 flex gap-2 flex-wrap">
+                <button
+                  class="btn btn-outline btn-success btn-sm interview-btn"
+                >
+                  Interview
+                </button>
+                <button class="btn btn-outline btn-error btn-sm rejected-btn">
+                  Rejected
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 5 -->
+          <div class="job-card card bg-base-100 shadow-sm" data-status="not">
+            <div class="card-body">
+              <div class="flex items-start justify-between">
+                <div>
+                  <h3 class="text-lg font-bold">SecureWave</h3>
+                  <p class="text-slate-500">IT Support Engineer</p>
+                </div>
+                <button
+                  class="btn btn-ghost btn-sm btn-circle delete-btn"
+                  title="Delete"
+                >
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </div>
+              <p class="text-sm text-slate-500 mt-1">
+                Chattogram, BD • Part-time • ৳25,000 - ৳45,000
+              </p>
+              <span class="badge badge-ghost status-badge mt-3"
+                >NOT APPLIED</span
+              >
+              <p class="mt-3 text-slate-700">
+                Support users with laptop troubleshooting, OS setup, and basic
+                networking tasks.
+              </p>
+              <div class="mt-4 flex gap-2 flex-wrap">
+                <button
+                  class="btn btn-outline btn-success btn-sm interview-btn"
+                >
+                  Interview
+                </button>
+                <button class="btn btn-outline btn-error btn-sm rejected-btn">
+                  Rejected
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 6 -->
+          <div class="job-card card bg-base-100 shadow-sm" data-status="not">
+            <div class="card-body">
+              <div class="flex items-start justify-between">
+                <div>
+                  <h3 class="text-lg font-bold">FinStack</h3>
+                  <p class="text-slate-500">QA Tester (Web)</p>
+                </div>
+                <button
+                  class="btn btn-ghost btn-sm btn-circle delete-btn"
+                  title="Delete"
+                >
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </div>
+              <p class="text-sm text-slate-500 mt-1">
+                Remote • Part-time • ৳25,000 - ৳45,000
+              </p>
+              <span class="badge badge-ghost status-badge mt-3"
+                >NOT APPLIED</span
+              >
+              <p class="mt-3 text-slate-700">
+                Test web apps, report bugs, and collaborate with developers to
+                improve quality.
+              </p>
+              <div class="mt-4 flex gap-2 flex-wrap">
+                <button
+                  class="btn btn-outline btn-success btn-sm interview-btn"
+                >
+                  Interview
+                </button>
+                <button class="btn btn-outline btn-error btn-sm rejected-btn">
+                  Rejected
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 7 -->
+          <div class="job-card card bg-base-100 shadow-sm" data-status="not">
+            <div class="card-body">
+              <div class="flex items-start justify-between">
+                <div>
+                  <h3 class="text-lg font-bold">PixelForge Studio</h3>
+                  <p class="text-slate-500">UI Designer</p>
+                </div>
+                <button
+                  class="btn btn-ghost btn-sm btn-circle delete-btn"
+                  title="Delete"
+                >
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </div>
+              <p class="text-sm text-slate-500 mt-1">
+                Chattogram, BD • Part-time • ৳25,000 - ৳45,000
+              </p>
+              <span class="badge badge-ghost status-badge mt-3"
+                >NOT APPLIED</span
+              >
+              <p class="mt-3 text-slate-700">
+                Design dashboards with good spacing, readable typography, and
+                consistent components.
+              </p>
+              <div class="mt-4 flex gap-2 flex-wrap">
+                <button
+                  class="btn btn-outline btn-success btn-sm interview-btn"
+                >
+                  Interview
+                </button>
+                <button class="btn btn-outline btn-error btn-sm rejected-btn">
+                  Rejected
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 8 -->
+          <div class="job-card card bg-base-100 shadow-sm" data-status="not">
+            <div class="card-body">
+              <div class="flex items-start justify-between">
+                <div>
+                  <h3 class="text-lg font-bold">APIWorks</h3>
+                  <p class="text-slate-500">Backend Intern (Node)</p>
+                </div>
+                <button
+                  class="btn btn-ghost btn-sm btn-circle delete-btn"
+                  title="Delete"
+                >
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </div>
+              <p class="text-sm text-slate-500 mt-1">
+                Dhaka, BD • Part-time • ৳25,000 - ৳45,000
+              </p>
+              <span class="badge badge-ghost status-badge mt-3"
+                >NOT APPLIED</span
+              >
+              <p class="mt-3 text-slate-700">
+                Learn REST APIs, work with databases, and implement small
+                backend features with guidance.
+              </p>
+              <div class="mt-4 flex gap-2 flex-wrap">
+                <button
+                  class="btn btn-outline btn-success btn-sm interview-btn"
+                >
+                  Interview
+                </button>
+                <button class="btn btn-outline btn-error btn-sm rejected-btn">
+                  Rejected
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div
+        id="emptyState"
+        class="hidden mt-8 rounded-2xl p-8 text-center bg-white"
+      >
+        <div class="flex justify-center text-4xl">
+          <img src="assets/jobs.png" alt="" srcset="" />
+        </div>
+        <h3 class="mt-4 font-bold text-slate-800">No jobs available</h3>
+        <p class="mt-1 text-sm text-slate-500">
+          Check back soon for new job opportunities.
+        </p>
+      </div>
+    </section>
+  </body>
 </html>
