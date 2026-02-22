@@ -1,9 +1,9 @@
 const jobsContainer = document.getElementById("jobsContainer");
 
-const totalCount = document.getElementById("totalCount");
-const interviewCount = document.getElementById("interviewCount");
-const rejectedCount = document.getElementById("rejectedCount");
-const jobCount = document.getElementById("jobCount");
+let  totalCount = document.getElementById("totalCount");
+let  interviewCount = document.getElementById("interviewCount");
+let  rejectedCount = document.getElementById("rejectedCount");
+let  jobCount = document.getElementById("jobCount");
 
 const optionAll = document.getElementById("optionAll");
 const optionInterview = document.getElementById("optionInterview");
