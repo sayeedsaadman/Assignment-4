@@ -19,5 +19,7 @@
 
 
 ### 4. What is Event Delegation in JavaScript? Why is it useful?
+## Answer: Event Delegation is a formate of code where a parent element handles events for its child elements using hierchy method and its useful as it makes code more efficient and scalable.
 
 ### 5. What is the difference between preventDefault() and stopPropagation() methods?
+## Answer: stopPropagation() basically stop it to go to the parent node through hierchy method it stop the event, and preventDefault() tops the browser default action
