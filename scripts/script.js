@@ -16,15 +16,17 @@ let currentFilter = "all";
 
 function updateCounts() {
   const allCards = jobsContainer.querySelectorAll(".job-card");
+  // console.log(allCards);
   const interviewCards = jobsContainer.querySelectorAll('.job-card[data-status="interview"]');
+  // console.log(interviewCards);
   const rejectedCards = jobsContainer.querySelectorAll('.job-card[data-status="rejected"]');
-
-  totalCount.innerText = allCards.length;
-  jobCount.innerText = allCards.length;
-
+  let cardLength = allCards.length;
+  totalCount.innerText = cardLength;
+  jobCount.innerText = cardLength;
+  
   interviewCount.innerText = interviewCards.length;
   rejectedCount.innerText = rejectedCards.length;
-  if (allCards.length === 0) {
+  if (cardLength === 0) {
     emptyState.classList.remove("hidden");
   } else {
     emptyState.classList.add("hidden");
@@ -52,26 +54,40 @@ function updateBadge(card) {
 
 function applyFilter() {
   const cards = jobsContainer.querySelectorAll(".job-card");
+  let visibleCount = 0;
 
   cards.forEach(card => {
     const status = card.dataset.status;
 
     if (currentFilter === "all") {
       card.classList.remove("hidden");
+      visibleCount++;
     } 
     else if (currentFilter === "interview") {
-      if (status === "interview") card.classList.remove("hidden");
-      else card.classList.add("hidden");
+      if (status === "interview") {
+        card.classList.remove("hidden");
+        visibleCount++;
+      } else {
+        card.classList.add("hidden");
+      }
     } 
     else if (currentFilter === "rejected") {
-      if (status === "rejected") card.classList.remove("hidden");
-      else card.classList.add("hidden");
+      if (status === "rejected") {
+        card.classList.remove("hidden");
+        visibleCount++;
+      } else {
+        card.classList.add("hidden");
+      }
     }
   });
+  if (visibleCount === 0) {
+    emptyState.classList.remove("hidden");
+  } else {
+    emptyState.classList.add("hidden");
+  }
 }
 
 
-// 4) Button style (active button)
 function setActive(btn) {
   optionAll.classList.remove("btn-primary");
   optionAll.classList.add("btn-ghost");
@@ -87,7 +103,6 @@ function setActive(btn) {
 }
 
 
-// 5) Filter button clicks
 optionAll.addEventListener("click", function () {
   currentFilter = "all";
   setActive(optionAll);
@@ -106,47 +121,3 @@ optionRejected.addEventListener("click", function () {
   applyFilter();
 });
 
-
-// 6) One click listener for everything (Interview / Rejected / Delete)
-jobsContainer.addEventListener("click", function (event) {
-  const card = event.target.closest(".job-card");
-  if (!card) return;
-
-  // Delete button
-  if (event.target.closest(".delete-btn")) {
-    card.remove();
-    updateCounts();
-    return;
-  }
-
-  // Interview button
-  if (event.target.closest(".interview-btn")) {
-    card.dataset.status = "interview";
-    updateBadge(card);
-    updateCounts();
-    applyFilter();
-    return;
-  }
-
-  // Rejected button
-  if (event.target.closest(".rejected-btn")) {
-    card.dataset.status = "rejected";
-    updateBadge(card);
-    updateCounts();
-    applyFilter();
-    return;
-  }
-});
-
-
-// 7) On page load (initialize)
-const allCards = jobsContainer.querySelectorAll(".job-card");
-allCards.forEach(card => {
-  // your HTML has data-status="not"
-  // we keep it as "not"
-  updateBadge(card);
-});
-
-setActive(optionAll);
-updateCounts();
-applyFilter();
