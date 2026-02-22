@@ -155,3 +155,5 @@ const allCards = jobsContainer.querySelectorAll(".job-card");
 allCards.forEach(card => {
   updateBadge(card);
 });
+setActive(optionAll);
+applyFilter();
