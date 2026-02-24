@@ -152,8 +152,8 @@ jobsContainer.addEventListener("click", function (event) {
 
 
 const allCards = jobsContainer.querySelectorAll(".job-card");
-allCards.forEach(card => {
-  updateBadge(card);
-});
+for (let i = 0; i < allCards.length; i++) {
+  updateBadge(allCards[i]);
+}
 setActive(optionAll);
 applyFilter();
